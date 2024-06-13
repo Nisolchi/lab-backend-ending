@@ -6,7 +6,7 @@ const mongoose =require('mongoose');
 
 
 router.get("/",(req, res, next)=>{
-    res.json("my new Backend");
+    res.json("my nch Backend");
 });
 
 router.get("/books", (req, res, next) =>{
@@ -26,11 +26,12 @@ router.get("/books/:bookId", (req, res, next)=>{
     }
 
     Book.findById(bookId)
-    .then((books)=> res.status(200).json(books))
+    .then((book)=> res.status(200).json(book))
     .catch((error)=>{
-        console.log("error while retrieving the book", error);
-        res.status(500).json({message:" Error while retrieving the book"});
+        console.log("Error while retrieving the book", error);
+        res.status(500).json({message:" error while retrieving the book "});
     });
+    
 
 });
 
@@ -42,6 +43,21 @@ router.post("/books", (req, res, next)=>{
         res.status(500).json({message:" Error while creating the book"});
     });
     
+});
+
+router.put("/books/bookId", (req, res, next)=>{
+    const{bookId}= req.params;
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
+        res.status(400).json({ message: 'Specified id is not valid' });
+        return;
+      }
+      Book.findByIdAndUpdate(bookId, req.body, {new:true})
+      .then((updatedBook)=>res.json(updatedBook))
+      .catch((error)=>{
+        console.log("error while updating the book", error);
+        res.status(500).json({message:" Error while updating the book"});
+    });
+      
 });
 
 router.delete("/books/:bookId", (req, res, next)=>{
