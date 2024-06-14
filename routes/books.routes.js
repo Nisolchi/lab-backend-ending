@@ -46,7 +46,7 @@ router.post("/books", (req, res, next)=>{
     
 });
 
-router.put('/books/:bookId', async (req, res, next) => {
+router.put("/:bookId", async (req, res, next) => {
     const { bookId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(bookId)) {
@@ -65,7 +65,7 @@ router.put('/books/:bookId', async (req, res, next) => {
     }
 });
 
-router.delete('/books/:bookId', async (req, res, next) => {
+router.delete("/books/:bookId", async (req, res, next) => {
     const { bookId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(bookId)) {
